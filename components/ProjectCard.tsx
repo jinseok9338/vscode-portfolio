@@ -1,7 +1,20 @@
-import Image from 'next/image';
-import styles from '../styles/ProjectCard.module.css';
+import Image from "next/image";
+import React from "react";
+import styles from "../styles/ProjectCard.module.css";
 
-const ProjectCard = ({ project }) => {
+interface iProjectsCardProps {
+  project: {
+    id: number;
+    name: string;
+    image: string;
+    description: string;
+    tags: string[];
+    source_code: string;
+    demo: string;
+  };
+}
+
+const ProjectCard = ({ project }: iProjectsCardProps) => {
   return (
     <div className={styles.card}>
       <Image src={project.image} height={300} width={600} alt={project.name} />

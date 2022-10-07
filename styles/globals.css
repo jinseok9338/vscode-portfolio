@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&display=swap");
 
 *,
 *::before,
@@ -84,4 +84,32 @@
 }
 .css-modules:hover {
   background: rgba(21, 114, 182, 0.25);
+}
+
+.rust {
+  border: 2px solid rgb(240, 173, 5);
+}
+.rust:hover {
+  background: rgba(240, 173, 5, 0.25);
+}
+
+.yew {
+  border: 2px solid rgb(26, 232, 125);
+}
+.yew:hover {
+  background: rgba(26, 232, 125, 0.25);
+}
+
+.scss {
+  border: 2px solid rgb(245, 5, 233);
+}
+.scss:hover {
+  background: rgba(245, 5, 233, 0.25);
+}
+
+.WebAssembly {
+  border: 2px solid rgb(136, 3, 252);
+}
+.WebAssembly:hover {
+  background: rgb(136, 3, 252, 0.25);
 }

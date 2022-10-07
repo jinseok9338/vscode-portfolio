@@ -1,28 +1,29 @@
-import { useState } from 'react';
-import ContactCode from '../components/ContactCode';
-import styles from '../styles/ContactPage.module.css';
+import React from "react";
+import { useState } from "react";
+import ContactCode from "../components/ContactCode";
+import styles from "../styles/ContactPage.module.css";
 
 const ContactPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
 
   const submitForm = async (e) => {
     e.preventDefault();
     console.log(process.env.NEXT_PUBLIC_API_URL);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ name, email, subject, message }),
     });
     if (res.ok) {
-      alert('Your response has been received!');
-      setName('');
-      setEmail('');
-      setSubject('');
-      setMessage('');
+      alert("Your response has been received!");
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
     } else {
-      alert('There was an error. Please try again in a while.');
+      alert("There was an error. Please try again in a while.");
     }
   };
 
@@ -75,7 +76,7 @@ const ContactPage = () => {
             <textarea
               name="message"
               id="message"
-              rows="5"
+              rows={5}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
@@ -90,7 +91,7 @@ const ContactPage = () => {
 
 export async function getStaticProps() {
   return {
-    props: { title: 'Contact' },
+    props: { title: "Contact" },
   };
 }
 

@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "name": "Driwwwle",
+    "name": "LiveTerminal",
     "image": "https://imgur.com/kbGs6zH.png",
-    "description": "A platform for web developers to showcase their projects",
-    "tags": ["next", "node", "mongodb", "tailwind", "react-query"],
+    "description": "Terminal Emulation made with rust and WebAssembly",
+    "tags": ["rust", "yew", "scss", "WebAssembly"],
     "source_code": "https://github.com/itsnitinr/driwwwle-v2",
     "demo": "https://driwwwle.com/"
   },
@@ -13,6 +13,7 @@
     "name": "PCB Cupid",
     "image": "https://imgur.com/tAZotn3.png",
     "description": "E-commerce website for a PCB manufacturing company",
+    "source_code": "",
     "tags": ["react", "node", "mongodb", "redux", "razorpay", "material-ui"],
     "demo": "https://www.pcbcupid.com/"
   },
