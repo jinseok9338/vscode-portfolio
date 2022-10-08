@@ -32,10 +32,10 @@ const Terminal = ({
   onClose = noop,
   onExpand = noop,
   onMinimize = noop,
-}) => {
+}: any) => {
   const bash = new Bash(extensions);
   bash.commands = Object.assign({}, extensions, BaseCommands);
-  const [ctrlPressed, setCtrlPressed] = useState(false);
+
   const [state, setState] = useState({
     settings: { user: { username: prefix.split("@")[1] } },
     history: history,
@@ -67,9 +67,7 @@ const Terminal = ({
    */
   // Todo which is deprecated change it to code later...
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLInputElement>) => {
-    if (evt.which === CTRL_CHAR_CODE) {
-      setCtrlPressed(true);
-    } else if (evt.which === TAB_CHAR_CODE) {
+    if (evt.which === TAB_CHAR_CODE) {
       // Tab must be on keydown to prevent default
       attemptAutocomplete();
       evt.preventDefault();
@@ -89,11 +87,11 @@ const Terminal = ({
    */
   const handleKeyUp = (evt: React.KeyboardEvent<HTMLInputElement>) => {
     if (evt.which === L_CHAR_CODE) {
-      if (ctrlPressed) {
+      if (evt.ctrlKey) {
         setState(bash.execute("clear", state));
       }
     } else if (evt.which === C_CHAR_CODE) {
-      if (ctrlPressed) {
+      if (evt.ctrlKey) {
         ref.current.value = "";
       }
     } else if (evt.which === UP_CHAR_CODE) {
@@ -102,12 +100,11 @@ const Terminal = ({
       }
     } else if (evt.which === DOWN_CHAR_CODE) {
       if (bash.hasNextCommand()) {
+        console.log(bash.hasNextCommand()); // this is the problem...
         ref.current.value = bash.getNextCommand();
       } else {
         ref.current.value = "";
       }
-    } else if (evt.which === CTRL_CHAR_CODE) {
-      setCtrlPressed(false);
     }
   };
 
@@ -116,8 +113,10 @@ const Terminal = ({
 
     // Execute command
     const input = evt.target[0].value;
+
     const newState = bash.execute(input, state);
     setState(newState);
+    ref.current.focus();
     ref.current.value = "";
   };
 
@@ -145,13 +144,13 @@ const Terminal = ({
               <div>{menu}</div>
             </li>
           ))}
-          <li style={style.closeButton}>
+          <li style={style.closeButton} onClick={() => onClose(false)}>
             <i className="fa fa-times" aria-hidden="true"></i>
           </li>
         </ul>
       </div>
       <div style={style.body} onClick={() => ref.current.focus()}>
-        {history.map(renderHistoryItem(style))}
+        {state.history.map(renderHistoryItem(style))}
         <form onSubmit={(evt) => handleSubmit(evt)} style={style.form}>
           <span style={style.prefix}>{`${prefix} ~${state.cwd} $`}</span>
           <input

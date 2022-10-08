@@ -7,14 +7,12 @@ import React from "react";
 import Terminal from "../components/Terminal";
 
 function MyApp({ Component, pageProps }) {
-  const clear = {
-    exec: ({ structure, history, cwd }, args) => {
-      return { structure, cwd, history: [] };
-    },
+  const [openTerminal, setOpenTerminal] = useState(false);
+  const OpenTerminal = (event: KeyboardEvent) => {
+    if ((event.ctrlKey || event.metaKey) && event.key == "j") {
+      setOpenTerminal((prev) => !prev);
+    }
   };
-
-  const extensions = { clear };
-
   useEffect(() => {
     if (localStorage.getItem("theme")) {
       document.documentElement.setAttribute(
@@ -24,11 +22,16 @@ function MyApp({ Component, pageProps }) {
     }
   }, []);
 
+  useEffect(() => {
+    addEventListener("keydown", OpenTerminal);
+    return removeEventListener("keyup", OpenTerminal);
+  }, []);
+
   return (
     <Layout>
       <Head title={`Jinseok Seo | ${pageProps.title}`} />
       <Component {...pageProps} />
-      <Terminal />
+      {openTerminal && <Terminal onClose={setOpenTerminal} />}
     </Layout>
   );
 }

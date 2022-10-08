@@ -20,7 +20,7 @@ BaseStyles.ReactBash = {
   borderRadius: "5px",
   display: "flex",
   flexDirection: "column",
-  fontFamily: "'JetBrains Mono', monospace;",
+  fontFamily: "'JetBrains Mono', monospace",
   fontSize: "0.9rem",
   fontWeight: "400",
   height: "200px",
