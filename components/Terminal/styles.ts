@@ -35,6 +35,8 @@ BaseStyles.ReactBash = {
 BaseStyles.header = {
   height: "35px",
   padding: "5px 10px 0 0",
+  position: "sticky",
+  top: "0",
 };
 
 const circle = {
@@ -125,11 +127,11 @@ export default {
   }),
   dark: Object.assign({}, BaseStyles, {
     body: Object.assign({}, BaseStyles.body, {
-      backgroundColor: "#000",
+      backgroundColor: "#011627;",
       color: "#d0d0d0",
     }),
     header: Object.assign({}, BaseStyles.header, {
-      backgroundColor: "#000",
+      backgroundColor: "#011627;",
     }),
     prefix: Object.assign({}, BaseStyles.prefix, {
       color: "#5b65fb",
