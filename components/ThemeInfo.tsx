@@ -1,10 +1,10 @@
-import Image from 'next/image';
-import styles from '../styles/ThemeInfo.module.css';
+import Image from "next/image";
+import styles from "../styles/ThemeInfo.module.css";
 
-const ThemeInfo = ({ icon, name, publisher, theme }) => {
-  const setTheme = (theme) => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+const ThemeInfo = ({ icon, name, publisher, theme, description }) => {
+  const setTheme = (theme: string) => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   };
 
   return (
