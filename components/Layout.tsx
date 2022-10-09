@@ -7,14 +7,15 @@ import styles from "../styles/Layout.module.css";
 
 interface iLayoutProps {
   children: React.ReactNode;
+  openTerminal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Layout = ({ children }: iLayoutProps) => {
+const Layout = ({ children, openTerminal }: iLayoutProps) => {
   return (
     <>
       <Titlebar />
       <div className={styles.main}>
-        <Sidebar />
+        <Sidebar openTerminal={openTerminal} />
         <Explorer />
         <div style={{ width: "100%" }}>
           <Tabsbar />

@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <Layout>
+    <Layout openTerminal={setOpenTerminal}>
       <Head title={`Jinseok Seo | ${pageProps.title}`} />
       <Component {...pageProps} />
       {openTerminal && <Terminal onClose={setOpenTerminal} />}

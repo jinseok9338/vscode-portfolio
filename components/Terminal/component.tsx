@@ -4,22 +4,16 @@ import Bash from "./bash";
 
 import styles from "../../styles/Terminal.module.css";
 
-const CTRL_CHAR_CODE = 17;
 const L_CHAR_CODE = 76;
 const C_CHAR_CODE = 67;
 const UP_CHAR_CODE = 38;
 const DOWN_CHAR_CODE = 40;
 const TAB_CHAR_CODE = 9;
-const noop = () => {};
 
 const TerminalMenus = ["Problem", "output", "Debug Console", "Terminal"];
 
-const Themes = {
-  LIGHT: "light",
-  DARK: "dark",
-};
-
 interface iTerminalProps {
+  // todo
   history: string[];
 }
 
@@ -28,7 +22,7 @@ const Terminal = ({
   structure = {},
   extensions = {},
   prefix = "hacker@default",
-  onClose = noop,
+  onClose,
 }: any) => {
   const bash = new Bash(extensions);
   bash.commands = Object.assign({}, extensions, BaseCommands);
