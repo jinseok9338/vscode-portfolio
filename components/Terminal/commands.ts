@@ -18,7 +18,6 @@ export const help = {
   exec: (state) => {
     return Object.assign({}, state, {
       history: state.history.concat(
-        { value: "React-bash:" },
         {
           value:
             "These shell commands are defined internally.  Type 'help' to see this list.",

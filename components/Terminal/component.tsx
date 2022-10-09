@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as BaseCommands from "./commands";
 import Bash from "./bash";
-import Styles from "./styles";
+
+import styles from "../../styles/Terminal.module.css";
 
 const CTRL_CHAR_CODE = 17;
 const L_CHAR_CODE = 76;
@@ -27,11 +28,7 @@ const Terminal = ({
   structure = {},
   extensions = {},
   prefix = "hacker@default",
-  styles = {},
-  theme = Themes.DARK,
   onClose = noop,
-  onExpand = noop,
-  onMinimize = noop,
 }: any) => {
   const bash = new Bash(extensions);
   bash.commands = Object.assign({}, extensions, BaseCommands);
@@ -116,14 +113,13 @@ const Terminal = ({
 
     const newState = bash.execute(input, state);
     setState(newState);
-    ref.current.focus();
     ref.current.value = "";
   };
 
-  const renderHistoryItem = (style) => {
+  const renderHistoryItem = () => {
     return (item, key) => {
       const Prefix = item.hasOwnProperty("cwd") ? (
-        <span style={style.prefix}>{`${prefix} ~${item.cwd} $`}</span>
+        <span className={styles.prefix}>{`${prefix} ~${item.cwd} $`}</span>
       ) : undefined;
       return (
         <div data-test-id={`history-${key}`} key={key}>
@@ -134,31 +130,32 @@ const Terminal = ({
     };
   };
 
-  const style = Object.assign({}, Styles[theme] || Styles.light, styles);
   return (
-    <div className="ReactBash" style={style.ReactBash}>
-      <div style={style.header}>
-        <ul style={style.actionContainer}>
+    <div className={styles.bash}>
+      <div className={styles.bashHeader}>
+        <ul className={styles.bashActionContainer}>
           {TerminalMenus.map((menu) => (
-            <li style={style.actionList}>
+            <li className={styles.bashActionList}>
               <div>{menu}</div>
             </li>
           ))}
-          <li style={style.closeButton} onClick={() => onClose(false)}>
+          <li className={styles.bashCloseButton} onClick={() => onClose(false)}>
             <i className="fa fa-times" aria-hidden="true"></i>
           </li>
         </ul>
       </div>
-      <div style={style.body} onClick={() => ref.current.focus()}>
-        {state.history.map(renderHistoryItem(style))}
-        <form onSubmit={(evt) => handleSubmit(evt)} style={style.form}>
-          <span style={style.prefix}>{`${prefix} ~${state.cwd} $`}</span>
+      <div className={styles.bashBody} onClick={() => ref.current.focus()}>
+        {state.history.map(renderHistoryItem())}
+        <form onSubmit={(evt) => handleSubmit(evt)} className={styles.bashForm}>
+          <span
+            className={styles.bashPrefix}
+          >{`${prefix} ~${state.cwd} $`}</span>
           <input
             autoComplete="off"
             onKeyDown={(e) => handleKeyDown(e)}
             onKeyUp={(e) => handleKeyUp(e)}
             ref={ref}
-            style={style.input}
+            className={styles.bashInput}
           />
         </form>
       </div>
