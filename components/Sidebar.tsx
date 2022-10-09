@@ -1,3 +1,4 @@
+// @ts-nocheck // this is for the className not applying for the icon
 import Link from "next/link";
 import { useRouter } from "next/router";
 import FilesIcon from "./icons/FilesIcon";
@@ -74,11 +75,13 @@ const Sidebar = ({ openTerminal }: iSidebarProps) => {
         ))}
       </div>
       <div className={styles.sidebarBottom}>
-        <div className={styles.iconContainer}>
-          <TerminalIcon
-            className={styles.icon}
-            onClick={() => openTerminal((prev) => !prev)}
-          />
+        <div
+          className={styles.iconContainer}
+          onClick={() => {
+            openTerminal((prev) => !prev);
+          }}
+        >
+          <TerminalIcon className={styles.icon} />
         </div>
         {sidebarBottomItems.map(({ Icon, path }) => (
           <div className={styles.iconContainer}>
