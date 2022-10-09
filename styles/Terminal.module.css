@@ -16,6 +16,12 @@
   scrollbar-color: var(--accent-color);
 }
 
+@media screen and (max-width: 900px) {
+  .bash {
+    display: none;
+  }
+}
+
 .bash::-webkit-scrollbar {
   width: 15px;
 }
