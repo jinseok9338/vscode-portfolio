@@ -12,6 +12,22 @@
   width: 82%;
   bottom: 25px;
   margin-left: -2rem;
+  scrollbar-width: 10px;
+  scrollbar-color: var(--accent-color);
+}
+
+.bash::-webkit-scrollbar {
+  width: 15px;
+}
+
+.bash::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-bg);
+  border-left: 1px solid #1e1f29;
+}
+
+.bash::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-bg);
+  border-left: 1px solid #1e1f29;
 }
 
 .bashHeader {
