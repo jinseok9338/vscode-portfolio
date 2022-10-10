@@ -5,13 +5,13 @@ import * as BashParser from "./parser";
 
 export default class Bash {
   commands: typeof BaseCommands;
-  prevCommands: any[];
+  prevCommands: string[];
   prevCommandsIndex: number;
 
   constructor(extensions = {}) {
     this.commands = Object.assign(extensions, BaseCommands);
     this.prevCommands = [];
-    this.prevCommandsIndex = 0;
+    this.prevCommandsIndex = -1;
   }
 
   /*
@@ -24,7 +24,8 @@ export default class Bash {
    */
   execute(input: string, currentState) {
     this.prevCommands.push(input);
-    this.prevCommandsIndex = this.prevCommands.length;
+    this.prevCommandsIndex = this.prevCommands.length - 1;
+    console.log(this.prevCommands, this.prevCommandsIndex);
 
     // Append input to history
     const newState = Object.assign({}, currentState, {
@@ -116,18 +117,33 @@ export default class Bash {
   }
 
   getPrevCommand() {
-    return this.prevCommands[--this.prevCommandsIndex];
+    const res = this.prevCommands[this.prevCommandsIndex];
+    this.prevCommandsIndex = this.prevCommandsIndex - 1;
+    return res;
   }
 
   getNextCommand() {
-    return this.prevCommands[++this.prevCommandsIndex];
+    this.prevCommandsIndex = this.prevCommandsIndex + 1;
+    const res = this.prevCommands[this.prevCommandsIndex];
+
+    return res;
   }
 
   hasPrevCommand() {
-    return this.prevCommandsIndex !== 0;
+    if (this.prevCommands.length === 0 || this.prevCommandsIndex === -1) {
+      return false;
+    }
+    return true;
   }
 
   hasNextCommand() {
-    return this.prevCommandsIndex !== this.prevCommands.length - 1;
+    if (
+      this.prevCommands.length == 0 ||
+      this.prevCommandsIndex === this.prevCommands.length - 1
+    ) {
+      return false;
+    }
+
+    return true;
   }
 }

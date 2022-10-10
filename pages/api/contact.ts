@@ -1,55 +1,14 @@
-const { Client } = require("@notionhq/client");
-
-const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
-});
-
-export default async (req, res) => {
-  if (req.method !== "POST") {
-    return res.status(405).json({ msg: "Only POST requests are allowed" });
-  }
-  try {
-    const { name, email, subject, message } = JSON.parse(req.body);
-    await notion.pages.create({
-      parent: {
-        database_id: process.env.NOTION_DATABASE_ID,
-      },
-      properties: {
-        Name: {
-          title: [
-            {
-              text: {
-                content: name,
-              },
-            },
-          ],
-        },
-        Email: {
-          email,
-        },
-        Subject: {
-          rich_text: [
-            {
-              text: {
-                content: subject,
-              },
-            },
-          ],
-        },
-        Message: {
-          rich_text: [
-            {
-              text: {
-                content: message,
-              },
-            },
-          ],
-        },
-      },
-    });
-    res.status(201).json({ msg: "Success" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ msg: error });
-  }
-};
+import { NextApiRequest, NextApiResponse } from "next";
+const nodemailer = require("nodemailer");
+const smtpTransport = require("nodemailer-smtp-transport");
+// this method won't work through gmail.. I should use another way or scrap this altogether
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  console.log(req.body);
+  res.json({
+    message:
+      "currently working on email service I am sorry for the inconvenience",
+  });
+}

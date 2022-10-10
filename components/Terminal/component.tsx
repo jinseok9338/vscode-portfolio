@@ -16,7 +16,7 @@ interface iTerminalProps {
   // todo
   history: string[];
 }
-
+const bash = new Bash();
 const Terminal = ({
   history = [],
   structure = {},
@@ -24,9 +24,7 @@ const Terminal = ({
   prefix = "hacker@default",
   onClose,
 }: any) => {
-  const bash = new Bash(extensions);
   bash.commands = Object.assign({}, extensions, BaseCommands);
-
   const [state, setState] = useState({
     settings: { user: { username: prefix.split("@")[1] } },
     history: history,
@@ -88,10 +86,11 @@ const Terminal = ({
     } else if (evt.which === UP_CHAR_CODE) {
       if (bash.hasPrevCommand()) {
         ref.current.value = bash.getPrevCommand();
+      } else {
+        ref.current.value = "";
       }
     } else if (evt.which === DOWN_CHAR_CODE) {
       if (bash.hasNextCommand()) {
-        console.log(bash.hasNextCommand()); // this is the problem...
         ref.current.value = bash.getNextCommand();
       } else {
         ref.current.value = "";
@@ -147,6 +146,7 @@ const Terminal = ({
           <input
             autoComplete="off"
             onKeyDown={(e) => handleKeyDown(e)}
+            onChange={() => ref.current.focus()}
             onKeyUp={(e) => handleKeyUp(e)}
             ref={ref}
             className={styles.bashInput}
