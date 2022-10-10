@@ -8,7 +8,7 @@ const CustomHead = ({ title }) => {
         name="description"
         content="Jinseok Seo is an avid full stack web developer building websites and applications you'd love to use"
       />
-
+      <meta property="og:image" content="/screenshot.png" />
       <meta property="og:title" content="Jinseok Seo's Portfolio" />
       <meta
         property="og:url"
