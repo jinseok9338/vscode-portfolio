@@ -4,8 +4,8 @@ import styles from "../styles/ContactCode.module.css";
 const contactItems = [
   {
     social: "website",
-    link: "nitinranganath.me",
-    href: "https://nitinranganath.me",
+    link: "jinseok9338.me",
+    href: "https://github.com/jinseok9338",
   },
   {
     social: "email",
