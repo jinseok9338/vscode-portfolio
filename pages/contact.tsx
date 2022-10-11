@@ -3,7 +3,7 @@ import { useState } from "react";
 import ContactCode from "../components/ContactCode";
 import styles from "../styles/ContactPage.module.css";
 
-const ContactPage = () => {
+const ContactPage = ({ isUserKorean }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -32,11 +32,15 @@ const ContactPage = () => {
   return (
     <div className={styles.container}>
       <div>
-        <h3 className={styles.heading}>Reach Out Via Socials</h3>
+        <h3 className={styles.heading}>{`${
+          isUserKorean ? "소셜 미디어" : "Reach Out Via Socials"
+        }`}</h3>
         <ContactCode />
       </div>
       <div>
-        <h3 className={styles.heading}>Or Fill Out This Form</h3>
+        <h3 className={styles.heading}>{`${
+          isUserKorean ? "이메일을 보내주세요" : "Or Send me an Email"
+        }`}</h3>
         <form className={styles.form} onSubmit={submitForm}>
           <div className={styles.flex}>
             <div>
@@ -91,9 +95,15 @@ const ContactPage = () => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps({ req, res }) {
+  const userlanguages =
+    typeof navigator === "undefined"
+      ? req?.headers["accept-language"]?.split(",")
+      : ["en"];
+
+  const isUserKorean = userlanguages?.includes("ko-KR") ? true : false;
   return {
-    props: { title: "Contact" },
+    props: { title: "Contact", isUserKorean },
   };
 }
 

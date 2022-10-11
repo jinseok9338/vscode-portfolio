@@ -5,6 +5,7 @@ import "../styles/globals.css";
 import "../styles/themes.css";
 import React from "react";
 import Terminal from "../components/Terminal";
+import { NextPageContext } from "next";
 
 function MyApp({ Component, pageProps }) {
   const [openTerminal, setOpenTerminal] = useState(false);

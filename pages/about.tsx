@@ -1,20 +1,34 @@
+import { NextPageContext } from "next";
 import { useState } from "react";
 
-const AboutPage = () => {
-  const [korean, setKorean] = useState(false);
+interface iAboutPageProps {
+  isUserKorean: boolean;
+  title: string;
+}
+
+const AboutPage = ({ isUserKorean, title }: iAboutPageProps) => {
+  console.log(isUserKorean, title);
+  const [korean, setKorean] = useState(isUserKorean); // change the user on Click
   return (
     <div
       style={{
         lineHeight: "300%",
+        fontSize: `${korean ? "14px" : "inherit"}`,
       }}
     >
-      <h1 id="hi-i-m-jinseok-seo">Hi, I&#39;m Jinseok Seo</h1>
-      <p>A junior frontend developer from Korea</p>
-      <h2 id="about-me">About Me</h2>
+      <h1 id="hi-i-m-jinseok-seo">{`${
+        korean ? "안녕하세요 서진석 입니다😀" : "Hi, I'm Jinseok Seo 😀"
+      }`}</h1>
+      <p>{`${
+        korean
+          ? "아직은 배우고 싶은게 많은 개발자 입니다."
+          : "A junior frontend developer from Korea"
+      }`}</p>
+      <h2 id="about-me">{`${korean ? "나에 대해" : "About Me"}`}</h2>
       <ul>
         <li>
           <p>
-            {"🌱 I’m currently learning "}
+            {`${korean ? "현재 배우는것 " : "🌱 I’m currently learning "}`}
             <a href="https://kubernetes.io/">
               <img
                 src="https://img.shields.io/badge/-Kubernetes-005571?style=for-the-badge&amp;logo=Kubernetes&amp;logoColor=ffffff"
@@ -25,13 +39,13 @@ const AboutPage = () => {
         </li>
         <li>
           <p>
-            {"📫 How to reach me "}
+            {`${korean ? "연락처 " : "📫 How to reach me "}`}
             <a href="mailto:jinseok9338@gmail.com">
               <img
                 src="https://img.shields.io/badge/-gmail-c14438?style=for-the-badge&amp;logo=Gmail&amp;logoColor=ffffff"
                 alt="Gmail Badge"
               />
-            </a>{" "}
+            </a>
             <a href="https://twitter.com/jinseok9338">
               <img
                 src="https://img.shields.io/badge/twitter-1DA1F2.svg?style=for-the-badge&amp;logo=twitter&amp;logoColor=ffffff"
@@ -41,7 +55,9 @@ const AboutPage = () => {
           </p>
         </li>
       </ul>
-      <h2 id="operating-system-tools">Operating System &amp; Tools</h2>
+      <h2 id="operating-system-tools">{`${
+        korean ? "쓰는 도구 " : "Operating System & Tools "
+      }`}</h2>
       <p>
         <a href="https://www.apple.com/macos/mojave/">
           <img
@@ -70,7 +86,9 @@ const AboutPage = () => {
           />
         </a>
       </p>
-      <h2 id="technology-stack">Technology Stack</h2>
+      <h2 id="technology-stack">{`${
+        korean ? "기술스택 " : "Technology Stack "
+      }`}</h2>
       <p>
         <a href="https://www.python.org/">
           <img
@@ -157,7 +175,7 @@ const AboutPage = () => {
           />
         </a>
       </p>
-      <h2 id="stats">Stats</h2>
+      <h2 id="stats">{`${korean ? "깃허브 스탯 " : "Stats "}`}</h2>
       <p>
         <img
           src="https://github-readme-stats.vercel.app/api?username=jinseok9338&show_icons=true&theme=dracula"
@@ -167,13 +185,13 @@ const AboutPage = () => {
 
       <p>
         <img
-          src="http://img.shields.io/badge/Code%20Time-2%2C158%20hrs%2046%20mins-blue"
+          src="https://img.shields.io/badge/Code%20Time-2%2C158%20hrs%2046%20mins-blue"
           alt="Code Time"
         />
       </p>
       <p>
         <img
-          src="http://img.shields.io/badge/Profile%20Views-164-blue"
+          src="https://img.shields.io/badge/Profile%20Views-164-blue"
           alt="Profile Views"
         />
       </p>
@@ -181,9 +199,15 @@ const AboutPage = () => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps({ req, res }) {
+  const userlanguages =
+    typeof navigator === "undefined"
+      ? req?.headers["accept-language"]?.split(",")
+      : ["en"];
+
+  const isUserKorean = userlanguages?.includes("ko-KR") ? true : false;
   return {
-    props: { title: "About" },
+    props: { title: "About", isUserKorean },
   };
 }
 

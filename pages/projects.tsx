@@ -5,6 +5,7 @@ import React from "react";
 
 interface iProjectPageProps {
   title: string;
+  isUserKorean: boolean;
   projects: {
     id: number;
     name: string;
@@ -13,27 +14,37 @@ interface iProjectPageProps {
     tags: string[];
     source_code: string;
     demo: string;
+    korean: string;
   }[];
 }
 
-const ProjectsPage = ({ projects }: iProjectPageProps) => {
+const ProjectsPage = ({ projects, isUserKorean }: iProjectPageProps) => {
   return (
     <>
       <h3>PortFolio</h3>
       <div className={styles.container}>
         {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+          <ProjectCard
+            key={project.id}
+            project={project}
+            isUserKorean={isUserKorean}
+          />
         ))}
       </div>
     </>
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps({ req, res }) {
   const projects = getProjects();
+  const userlanguages =
+    typeof navigator === "undefined"
+      ? req?.headers["accept-language"]?.split(",")
+      : ["en"];
 
+  const isUserKorean = userlanguages?.includes("ko-KR") ? true : false;
   return {
-    props: { title: "Projects", projects },
+    props: { title: "Projects", isUserKorean, projects },
   };
 }
 

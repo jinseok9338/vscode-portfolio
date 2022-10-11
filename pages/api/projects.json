@@ -6,7 +6,8 @@
     "description": "Terminal Emulation made with rust and WebAssembly",
     "tags": ["rust", "yew", "scss", "WebAssembly"],
     "source_code": "https://github.com/jinseok9338/LiveTermimal",
-    "demo": "https://livetermimal-mddjix57ia-de.a.run.app/"
+    "demo": "https://livetermimal-mddjix57ia-de.a.run.app/",
+    "korean": "Rust 와 Yew 프레임워크를 이용한 WebAssembly 프로젝트"
   },
   {
     "id": 2,
@@ -14,8 +15,9 @@
     "image": "https://imgur.com/tAZotn3.png",
     "description": "MacOs inspired desktop environment with file system",
     "source_code": "https://github.com/jinseok9338/OsInBrowser",
-    "tags": ["react", "node", "redux", "material-ui"],
-    "demo": "https://osinbrowser-mddjix57ia-du.a.run.app/"
+    "tags": ["react", "node", "redux", "WebAssembly"],
+    "demo": "https://osinbrowser-mddjix57ia-du.a.run.app/",
+    "korean": "MacOs 테마와 비슷한 데스크탑 환경을 브라우저 상에서 구축한 프로젝트"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "description": "PortFolio site that's made with rust and Web Assembly",
     "tags": ["rust", "yew", "scss", "WebAssembly"],
     "source_code": "https://github.com/jinseok9338/PortFolio-Site-",
-    "demo": ""
+    "demo": "",
+    "korean": "Rust 와  WebAssembly를 이용하여 만든 간단한 포트폴리오 페이지"
   },
   {
     "id": 4,
@@ -33,6 +36,7 @@
     "description": "A themeable and developer-centric portfolio based on the VSCode",
     "tags": ["next", "css-modules", "react"],
     "source_code": "https://github.com/jinseok9338/vscode-portfolio",
-    "demo": ""
+    "demo": "https://vscode-portfolio-5ua8icwoc-jinseok9338.vercel.app/",
+    "korean": "Visual Studio Code 테마의 포트폴리오 사이트"
   }
 ]
