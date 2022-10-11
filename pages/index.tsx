@@ -3,7 +3,7 @@ import React from "react";
 import Illustration from "../components/Illustration";
 import styles from "../styles/HomePage.module.css";
 
-export default function HomePage() {
+export default function HomePage({ isUserKorean }) {
   return (
     <>
       <div className={styles.container}>
@@ -14,7 +14,9 @@ export default function HomePage() {
         <div className={styles.foreground}>
           <div className={styles.content}>
             <h1 className={styles.name}>Jinseok Seo</h1>
-            <h6 className={styles.bio}>Full Stack Web Developer</h6>
+            <h6 className={styles.bio}>{`${
+              isUserKorean ? "풀스택 웹 개발자" : "Full Stack Web Developer"
+            }`}</h6>
             <Link href="/projects">
               <button className={styles.button}>View Work</button>
             </Link>
@@ -29,8 +31,14 @@ export default function HomePage() {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps({ req, res }) {
+  const userlanguages =
+    typeof navigator === "undefined"
+      ? req?.headers["accept-language"]?.split(",")
+      : ["en"];
+
+  const isUserKorean = userlanguages?.includes("ko-KR") ? true : false;
   return {
-    props: { title: "Home" },
+    props: { title: "Home", isUserKorean },
   };
 }

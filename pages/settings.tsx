@@ -1,10 +1,10 @@
-import ThemeInfo from '../components/ThemeInfo';
-import styles from '../styles/SettingsPage.module.css';
+import ThemeInfo from "../components/ThemeInfo";
+import styles from "../styles/SettingsPage.module.css";
 
-const SettingsPage = () => {
+const SettingsPage = ({ isUserKorean }) => {
   return (
     <>
-      <h2>Manage Themes</h2>
+      <h2>{`${isUserKorean ? "테마 바꾸기" : "Manage Themes"}`}</h2>
       <div className={styles.container}>
         <ThemeInfo
           name="GitHub Dark"
@@ -53,9 +53,15 @@ const SettingsPage = () => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps({ req, res }) {
+  const userlanguages =
+    typeof navigator === "undefined"
+      ? req?.headers["accept-language"]?.split(",")
+      : ["en"];
+
+  const isUserKorean = userlanguages?.includes("ko-KR") ? true : false;
   return {
-    props: { title: 'Settings' },
+    props: { title: "Setting", isUserKorean },
   };
 }
 
