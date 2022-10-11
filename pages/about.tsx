@@ -195,6 +195,7 @@ const AboutPage = ({ isUserKorean, title }: iAboutPageProps) => {
           alt="Profile Views"
         />
       </p>
+      <img src="https://raw.githubusercontent.com/jinseok9338/jinseok9338/output/github-contribution-grid-snake.svg" />
     </div>
   );
 };
