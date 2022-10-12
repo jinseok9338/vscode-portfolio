@@ -5,7 +5,7 @@ const contactItems = [
   {
     social: "website",
     link: "jinseok9338.me",
-    href: "https://github.com/jinseok9338",
+    href: "https://vscode-portfolio-six.vercel.app",
   },
   {
     social: "email",
