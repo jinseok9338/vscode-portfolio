@@ -1,6 +1,5 @@
-import { NextPageContext } from "next";
 import { useState } from "react";
-
+import styles from "../styles/About.module.css";
 interface iAboutPageProps {
   isUserKorean: boolean;
   title: string;
@@ -11,6 +10,7 @@ const AboutPage = ({ isUserKorean, title }: iAboutPageProps) => {
   const [korean, setKorean] = useState(isUserKorean); // change the user on Click
   return (
     <div
+      className={styles.container}
       style={{
         lineHeight: "300%",
         fontSize: `${korean ? "14px" : "inherit"}`,
@@ -178,6 +178,7 @@ const AboutPage = ({ isUserKorean, title }: iAboutPageProps) => {
       <h2 id="stats">{`${korean ? "깃허브 스탯 " : "Stats "}`}</h2>
       <p>
         <img
+          className={styles.stat}
           src="https://github-readme-stats.vercel.app/api?username=jinseok9338&show_icons=true&theme=dracula"
           alt="jinseok9338"
         />
@@ -195,7 +196,10 @@ const AboutPage = ({ isUserKorean, title }: iAboutPageProps) => {
           alt="Profile Views"
         />
       </p>
-      <img src="https://raw.githubusercontent.com/jinseok9338/jinseok9338/output/github-contribution-grid-snake.svg" />
+      <img
+        className={styles.snake}
+        src="https://raw.githubusercontent.com/jinseok9338/jinseok9338/output/github-contribution-grid-snake.svg"
+      />
     </div>
   );
 };
