@@ -3,7 +3,7 @@ module.exports = {
     return [
       {
         // matching all API routes
-        source: "/:path*",
+        source: "https://main.d9hg163hcjy6a.amplifyapp.com",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" },
